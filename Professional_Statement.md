@@ -1,2 +1,2 @@
 # Professional statement
-> **I am a cybersecurity enthusiast that enjoys developing and contributing to solutions that can positively impact the protection of an organization and its people, team and clients. I work diligently to keep the highest standards regarding the pillars of security: confidentiality, integrity, accessibility, and ethic.**
+> **Cybersecurity analyst with a solid background in web development and a strong focus on risk mitigation, regulatory compliance, and secure architecture. I aim to deliver clear, actionable insights to protect critical assets and support secure digital transformation. Continuously driven to enhance systems, anticipate threats, and contribute to resilient, security-first environments.**
