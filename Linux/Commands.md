@@ -160,3 +160,58 @@
     ```
     $ mkdir -p books/hemmingway/favorites
     ```
+
+- ___rm___: The rm (remove) command is used to delete files and directories.
+    ```
+    $ rm file1
+    ```
+    Be careful when using it, because the action can not be undone and there is no trash bin to retrieve removed files. Fortunately, there are some safety measures to prevent this from happening, like _write-protected files_. They will prompt you for confirmation before deleting them. If a directory is write-protected it will also not be easily removed.
+    - **-f** or *force option* tells rm to remove all files, whether they are write protected or not, without prompting the user (as long as you have the appropriate permissions).
+        ```
+        $ rm -f file1
+        ```
+    - Adding the -i flag, will give you a prompt on whether you want to actually remove the files or directories. 
+        ```
+        $ rm -i file
+        ````
+    - You can’t just remove a directory by default with this command, you’ll need to add the **-r** flag (*recursive*) to remove all the files and any subdirectories it may have. Or you can remove a directory with the **rmdir** command.
+        ```
+        $ rm -r directory
+        ```
+        ```
+        $ rmdir directory
+        ```
+
+- ___find___: This command is used to find a specific file. You’ll have to specify the directory you’ll be searching it, and what you’re searching for, in this case we are trying to find a file by the name of puppies.jpg.
+    ```
+    $ find /home -name puppies.jpg
+    ```
+    - You can specify the type of file your searchig for.
+        ```
+        $ find /home -type d -name MyFolder
+        ```
+    - This comand will look inside any subdirectories the main directory may have as well.
+
+- ___man___: It shows a manual for a given command. Man pages are manuals that are by default built into most Linux operating systems. They provide documentation about commands and other aspects of the system.
+    ```
+    $ man ls
+    ```
+- ___whatis___: It provides a brief description of command line programs. The description gets sourced from the manual page of each command.
+    ```
+    $ whatis cat
+    ```
+- ___alias___: With this command you can create an alias for a command that you are using repetitively or that is too long.
+    ```
+    $ alias beto='ls -la'
+    ```
+    Now instead of typing *ls -la*, you can type *beto* and it will execute that command.
+    - Keep in mind that this command won't save your alias after reboot, so you'll need to add a permanent alias in:
+        ```
+        ~/.bashrc
+        ```
+        or similar files if you want to have it persist after reboot.
+    - You can remove aliases with the unalias command:
+        ```
+        $ unalias beto
+        ```
+- ___exit___ / ___logout___: You can use either one of these commands to exit from the shell.
