@@ -150,7 +150,7 @@
         ```
         $ mv -b directory1 directory2
         ```
-        ![interactive and backup arguments](interactive and backup arguments.png)
+        ![interactive and backup arguments](image.png)
 
 - ___mkdir___: This command (Make Directory) is useful for creating new directories. It will create a directory if it doesn’t already exist, and you can even make multiple directories at the same time.
     ```
