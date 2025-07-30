@@ -149,6 +149,7 @@ Debian: $ apt show my_package_name
 Red Hat: $ yum info my_package_name
 ```
 > **If you want to see information about which repositories your system is using, you can:**
+
     ```
     $ cat /etc/apt/sources.list
 
