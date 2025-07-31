@@ -65,9 +65,9 @@ Just like *.exe* is a single executable file, so is *.deb* and *.rpm*. These are
 ```
 sudo dpkg -i my_deb_package.deb     # Installs a .deb file locally.
 
-dpkg -l     # Lists all installed packages
+dpkg -l     # Lists all installed packages.
 
-dpkg -L some_package      # Lists the package's files
+dpkg -L some_package      # Lists the package's files.
 ```
 
 #### Installing a package
@@ -107,11 +107,11 @@ In this case, **l** stands for *list* and **q** stands for *query* and **a** for
 
 **Example:**
 ```
-sudo apt update     # Updates the available packages list
+sudo apt update     # Updates the available packages list.
 
-sudo apt install some_package     # Downloads and installs the package and its dependencies
+sudo apt install some_package     # Downloads and installs the package and its dependencies.
 
-sudo apt remove some_package        # Removes the package
+sudo apt remove some_package        # Removes the package.
 ```
 
 #### Installing a package from a repository
@@ -128,19 +128,27 @@ Debian: $ apt remove my_package_name
 Red Hat: $ yum erase my_package_name
 ```
 
-#### Updating packages of a repository
-In Linux, programs are installed from repositories (lists of available software that your system knows about). These lists don't automatically update themselves, they live locally on your computer and may become outdated if you don't synchronize them.
-
-Therefore, it's always a good practice to ***update the local package database before installing or upgrading something***.
+---
+### Updating packages of a repository
+In Linux, programs are installed from repositories (lists of available software that your system knows about). These lists don't automatically update themselves, they live locally on your computer and may become outdated if you don't synchronize them. Therefore, it's always a good practice to:
+> ***update the local package database before installing or upgrading something***.
 
 ```
 Debian: $ sudo apt update && sudo apt upgrade
 
 Red Hat: $ yum update
 ```
+> Which means:
 >- **update**: Updates de list of available packages.
 >- **upgrade**: Installs the pending updates
 
+---
+> Una analogía simple
+>
+> - **dpkg** es como un **instalador manual de paquetes *.deb***, como un doble clic en Windows.
+>
+> - **apt** es como una **tienda de aplicaciones**, *como Play Store*: sirve para **buscar, instalar, actualizar, desinstalar y resolver lo necesario para que todo funcione**.
+---
 
 #### Getting information about an installed package
 ```
@@ -148,12 +156,9 @@ Debian: $ apt show my_package_name
 
 Red Hat: $ yum info my_package_name
 ```
-> **If you want to see information about which repositories your system is using, you can:**
-
+> **If you want to see information about which repositories your system is using, you can use:**
     ```
-    $ cat /etc/apt/sources.list
-
-    $ ls /etc/apt/sources.list.d/
+    $ dpkg -l
     ```
 
 ---
@@ -161,20 +166,20 @@ Red Hat: $ yum info my_package_name
 ## Compile Source Code
 Often times you will encounter packages that only come in form of pure source code. You'll need to use a few commands to get that source code package compiled and installed on your system.
 
-First you'll need to have software to install the tools that will allow you to compile it.
-```
-$ sudo apt install build-essential
-```
+- First, you'll need to have some software to install the tools that will allow you to compile it.
+    ```
+    $ sudo apt install build-essential
+    ```
 
-Once you do that, extract the contents of the package file (most likely a *.tar.gz* file)
-```
-$ tar -xzvf my_package.tar.gz
-```
+- Once you do that, extract the contents of the package file (most likely a *.tar.gz* file)
+    ```
+    $ tar -xzvf my_package.tar.gz
+    ```
 
-Before you do anything, take a look at the README or INSTALL file inside the package. Sometimes there will be specific installation instructions.
+> Before you do anything, take a look at the README or INSTALL file inside the package. Sometimes there will be specific installation instructions.
 
-Next, use the **checkinstall** command.
-```
-$ sudo checkinstall
-```
-This will *"make install"* and build a ***.deb*** package and install it (build the software and copy the correct files to the correct locations on your computer). It makes it easier and more secure to remove the package later on.
+- Next, use the **checkinstall** command.
+    ```
+    $ sudo checkinstall
+    ```
+    This will *"make install"* and build a ***.deb*** package and install it (build the software and copy the correct files to the correct locations on your computer). It makes it easier and more secure to remove the package later on.
