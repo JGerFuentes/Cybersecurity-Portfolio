@@ -184,13 +184,31 @@
 
 - ___find___: This command is used to find a specific file. You’ll have to specify the directory you’ll be searching it, and what you’re searching for, in this case we are trying to find a file by the name of puppies.jpg.
     ```
-    $ find /home -name puppies.jpg
+    $ find theFolder/ -name puppies.jpg
     ```
     - You can specify the type of file your searchig for.
         ```
-        $ find /home -type d -name MyFolder
+        $ find theFolder/ -type d -name MyFolder
         ```
-    - This comand will look inside any subdirectories the main directory may have as well.
+    - You can also use the **"*" character** to search by the file extension if you are not sure about its exact name. For example:
+        ```
+        find MovingStuffDirectory/ -type f -name *.txt
+        
+        MovingStuffDirectory/Gilligan_250519.txt
+        MovingStuffDirectory/newTestFile.txt
+        ```
+    > This comand will look inside any subdirectories the main directory may have as well.
+
+    >    Example:
+    >    ```
+    >    find ~/ -type f -name *.txt
+    >    
+    >    /home/theFolder/entrenamiento/usuarios/prueba.txt
+    >    /home/theFolder/entrenamiento/editedFile.txt
+    >    /home/theFolder/entrenamiento/myTextArchive.txt
+    >    /home/theFolder/New_directory/MovingStuffDirectory/Gilligan_250519.txt
+    >    /home/theFolder/New_directory/MovingStuffDirectory/newTestFile.txt
+    >    ```
 
 - ___man___: It shows a manual for a given command. Man pages are manuals that are by default built into most Linux operating systems. They provide documentation about commands and other aspects of the system.
     ```
