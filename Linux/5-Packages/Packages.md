@@ -1,3 +1,136 @@
+## Package repositories
+Any Linux distribution already comes with pre-approved sources to get packages from (**repositories**), and this is how it installs all the base packages we see on our system. On a **Debian system**, this source file is inside the ***/etc/apt/sources.list*** file. So our machine will first look in there when we want to install a package and check for any source repositories we added to do so.
+
+---
+
+## Package management systems: ***apt*** and ***yum***
+
+***Apt* is exclusive to the Debian** family and ***yum* is exclusive to the Red Hat** family.
+
+### apt: The complete manager
+> - It is connected to the Internet
+> - It uses ***dpkg*** underneath.
+> - It checks for remote repositories.
+> - Resolves dependencies automatically.
+
+**Example:**
+```
+sudo apt update     # Updates the available packages list.
+
+sudo apt install some_package     # Downloads and installs the package and its dependencies.
+
+sudo apt remove some_package        # Removes the package.
+```
+
+#### Installing a package from a repository
+```
+Debian: $ sudo apt install my_package_name
+
+Red hat: $ yum install my_package_name
+```
+
+#### Removing a package
+```
+Debian: $ sudo apt remove my_package_name
+
+Red Hat: $ yum erase my_package_name
+```
+
+#### Updating packages of a repository
+In Linux, programs are installed from repositories (lists of available software that your system knows about). These lists don't automatically update themselves, they live locally on your computer and may become outdated if you don't synchronize them. Therefore, it's always a good practice to:
+> ***update the local package database before installing or upgrading something***.
+
+```
+Debian: $ sudo apt update && sudo apt upgrade
+
+Red Hat: $ yum update
+```
+> Which means:
+>- **update**: Updates de list of available packages.
+>- **upgrade**: Installs the pending updates
+
+So, the appropriate way to install a new package is to:
+
+- First **update** our **apt package management system**.
+    ```
+    sudo apt update
+    ```
+- Next, **install the package**:
+    ```
+    sudo apt install myPackage
+    ```
+- And finally, **we can remove it** after usage if we do not want to have it in our package manager.
+    ```
+    sudo apt remove myPackage
+    ```
+
+---
+
+## Package management tools: ***dpkg*** and ***rpm***
+
+Just like *.exe* is a single executable file, so is *.deb* and *.rpm*. These are popular formats of downloaded packages. They are exclusive to their distributions: 
+- ***.deb* for Debian** based
+- ***.rpm* for Red Hat** based.
+
+###  **dpkg**: The mechanic of local packages
+> - It works directly with the ***.deb*** files.
+> - Doesn't download anything from the Internet.
+> - It can only **install**, **remove** or **check for** ***packages that are already installed in our system or that we manually indicate it to***.
+
+**Example:**
+```
+sudo dpkg -i my_deb_package.deb     # Installs a .deb file locally.
+
+dpkg -l     # Lists all installed packages.
+
+dpkg -L some_package      # Lists the package's files.
+```
+
+#### Installing a package
+```
+Debian: $ dpkg -i my_deb_package.deb
+
+Red Hat: $ rpm -i some_rpm_package.rpm
+```
+The **i** stands for *install* (**--install**).
+
+#### Removing a package
+```
+Debian: $ dpkg -r a_deb_package.deb
+
+Red Hat: $ rpm -e some_rpm_package.rpm
+```
+Here, **r** stands for *remove* and **e** stands for *erase*.
+
+#### Listing installed packages
+```
+Debian: $dpkg -l
+
+Red Hat: $ rpm -qa
+```
+In this case, **l** stands for *list* and **q** stands for *query* and **a** for *all*.
+
+#### Getting information about an installed package
+```
+Debian: $ apt show my_package_name
+
+Red Hat: $ yum info my_package_name
+```
+> **If you want to see information about which repositories your system is using, you can use:**
+    ```
+    $ dpkg -l
+    ```
+
+---
+
+> **ANALOGÍA:**
+>
+> - **apt** es como una **tienda de aplicaciones** (*como Play Store*): sirve para **buscar, instalar, actualizar, desinstalar y resolver lo necesario para que todo funcione**.
+>
+> - **dpkg** es como un **instalador manual de paquetes *.deb***, al igual que *el doble clic en Windows*.
+
+---
+
 ## tar and gzip
 These file types refer to an ___archive of files___, they contain many files inside of them, but they come in this very neat single file known as a ___tar archive___ or a ___gzip archive___.
 
@@ -49,117 +182,6 @@ tar czf myCompressedFile.tar.gz
 ```
 tar xzf myCompressedFile.tar.gz
 ```
-
----
-
-## Package management tools: ***dpkg*** and ***rpm***
-
-Just like *.exe* is a single executable file, so is *.deb* and *.rpm*. These are popular formats of downloaded packages. They are exclusive to their distributions: ***.deb* for Debian** based and ***.rpm* for Red Hat** based.
-
-###  **dpkg**: The mechanic of local packages
-> - It works directly with the ***.deb*** files.
-> - Doesn't download anything from the Internet.
-> - It can only **install**, **remove** or **check for** packages that are already installed in our system or that we manually indicate it to.
-
-**Example:**
-```
-sudo dpkg -i my_deb_package.deb     # Installs a .deb file locally.
-
-dpkg -l     # Lists all installed packages.
-
-dpkg -L some_package      # Lists the package's files.
-```
-
-#### Installing a package
-```
-Debian: $ dpkg -i my_deb_package.deb
-
-Red Hat: $ rpm -i some_rpm_package.rpm
-```
-The **i** stands for *install* (**--install**).
-
-#### Removing a package
-```
-Debian: $ dpkg -r a_deb_package.deb
-
-Red Hat: $ rpm -e some_rpm_package.rpm
-```
-Here, **r** stands for *remove* and **e** stands for *erase*.
-
-#### Listing installed packages
-```
-Debian: $dpkg -l
-
-Red Hat: $ rpm -qa
-```
-In this case, **l** stands for *list* and **q** stands for *query* and **a** for *all*.
-
----
-
-## Package management systems: ***apt*** and ***yum***
-
-***Apt* is exclusive to the Debian** family and ***yum* is exclusive to the Red Hat** family.
-
-### apt: The complete manager, connected to the Internet
-> - It uses ***dpkg*** underneath.
-> - It checks for remote repositories.
-> - Resolves dependencies automatically.
-
-**Example:**
-```
-sudo apt update     # Updates the available packages list.
-
-sudo apt install some_package     # Downloads and installs the package and its dependencies.
-
-sudo apt remove some_package        # Removes the package.
-```
-
-#### Installing a package from a repository
-```
-Debian: $ apt install my_package_name
-
-Red hat: $ yum install my_package_name
-```
-
-#### Removing a package
-```
-Debian: $ apt remove my_package_name
-
-Red Hat: $ yum erase my_package_name
-```
-
----
-### Updating packages of a repository
-In Linux, programs are installed from repositories (lists of available software that your system knows about). These lists don't automatically update themselves, they live locally on your computer and may become outdated if you don't synchronize them. Therefore, it's always a good practice to:
-> ***update the local package database before installing or upgrading something***.
-
-```
-Debian: $ sudo apt update && sudo apt upgrade
-
-Red Hat: $ yum update
-```
-> Which means:
->- **update**: Updates de list of available packages.
->- **upgrade**: Installs the pending updates
-
----
-> Una analogía simple
->
-> - **dpkg** es como un **instalador manual de paquetes *.deb***, como un doble clic en Windows.
->
-> - **apt** es como una **tienda de aplicaciones**, *como Play Store*: sirve para **buscar, instalar, actualizar, desinstalar y resolver lo necesario para que todo funcione**.
----
-
-#### Getting information about an installed package
-```
-Debian: $ apt show my_package_name
-
-Red Hat: $ yum info my_package_name
-```
-> **If you want to see information about which repositories your system is using, you can use:**
-    ```
-    $ dpkg -l
-    ```
 
 ---
 
