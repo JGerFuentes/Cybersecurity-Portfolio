@@ -64,6 +64,23 @@ So, the appropriate way to install a new package is to:
     sudo apt remove myPackage
     ```
 
+### Phased updates for upgraded packages
+
+We can have the situation in which some upgrades are **deferred due to *phasing***:
+
+![Phased updates](/Linux/5-Packages/Phased%20upgrades%201.png)
+
+This message means that **these updates are being gradually liberated to some users to detect errors before they reach the general public**. Ubuntu stops the full upgrade of some packages (***phasing***) for some time as a measure of precaution. This does not imply a problem, its only a way hte system has to protect itself.
+
+There is a command that lets us know if a package is affected by phasing:
+```
+$ apt-cache policy packageName
+```
+![Apt-cache policy](/Linux/5-Packages/Phased%20upgrades%202.png)
+
+This command **shows all the versions known by the system**, even the old ones. It is useful to know if there are any old versions in the local repositories (useful in case we want to make a *downgrade*) and to check how a package evolved along upgrades.
+
+
 ---
 
 ## Package management tools: ***dpkg*** and ***rpm***
