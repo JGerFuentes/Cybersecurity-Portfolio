@@ -70,16 +70,37 @@ We can have the situation in which some upgrades are **deferred due to *phasing*
 
 ![Phased updates](/Linux/5-Packages/Phased%20upgrades%201.png)
 
-This message means that **these updates are being gradually liberated to some users to detect errors before they reach the general public**. Ubuntu stops the full upgrade of some packages (***phasing***) for some time as a measure of precaution. This does not imply a problem, its only a way hte system has to protect itself.
+This message means that **these updates are being gradually liberated to some users to detect errors before they reach the general public**. Ubuntu stops the full upgrade of some packages (***phasing***) for some time as a measure of precaution. This does not imply a problem, its only a way the system has to protect itself.
 
-There is a command that lets us know if a package is affected by phasing:
-```
-$ apt-cache policy packageName
-```
+There is a command that lets us know if a package is affected by phasing: ```$ apt-cache policy packageName```
+
 ![Apt-cache policy](/Linux/5-Packages/Phased%20upgrades%202.png)
 
-This command **shows all the versions known by the system**, even the old ones. It is useful to know if there are any old versions in the local repositories (useful in case we want to make a *downgrade*) and to check how a package evolved along upgrades.
+This command **shows all the versions available and known by the system**, even the old ones.
 
+- ***Installed***: it is the current installed version of the package.
+- ***Candidate***: it is the version that would be installed if we execute `apt upgrade`, in the case it is not affected by *phasing*.
+
+In the example, the **Version table** lists the following elements:
+- ***Repository priority*** (500, 100): this number indicates `apt` the urgency of the package's installation (urgent, normal or low).
+- ***Phasing*** (20%): this percentage indicates for how many users the version has been released.
+- ***Origin*** (/var/lib/... or http://...): it indicates from which remote repository or local archive the package comes from.
+
+This information is useful to know if there are any old versions in the local repositories (useful in case we want to make a *downgrade*) and to check how a package evolved along upgrades.
+
+In the example above, the ***2.7.7ubuntu1 500*** version of the ***python-apt-common package*** is an **old version, still available in the local repositories**. Its **priority** is **normal (500)**, not urgent nor ignored, and its **origin** is the `noble/main` directory.
+
+Whereas, the ***2.7.7ubuntu4 100*** version is the **already installed** version of the package. Its **priority** is **low (100)** and its **origin** is the `/var/lib/dpkg/status` directory.
+
+#### Installed version: ***dpkg***
+
+To see wich version of the package we have locally installed and its related archives, we can use the following command: ```dpkg -s python-apt-common```
+
+![Package version info](/Linux/5-Packages/Package%20version%20info.png)
+
+In case we want to check the files installed by the package in our system, we can use the following command: ```dpkg -L python-apt-common```
+
+![Package's installed files](/Linux/5-Packages/Installed%20files.png)
 
 ---
 
