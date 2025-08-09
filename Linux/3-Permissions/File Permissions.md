@@ -55,14 +55,15 @@ chmod 755 myFile
 ```
 755 covers the permissions for all sets. The first number (7) represents *user permissions*, the second number (5) represents *group permissions* and the last 5 represents *other permissions*.
 Here we are combining all the permissions into one number now, so you'll have to get some math involved.
- - 7 = 4 + 2 + 1, so 7 is the user permissions and it has read, write and execute permissions
- - 5 = 4 + 1, the group has read and execute permissions
- - 5 = 4 +1, and all other users have read and execute permissions
+ - 7 = 4 + 2 + 1, so 7 is the user permissions and it has read, write and execute permissions.
+ - 5 = 4 + 1, the group has read and execute permissions.
+ - 5 = 4 + 1, and all other users have read and execute permissions.
 
-> **NOTE**: You must sum up all the permissions that you want each set to have. If a set has write permissions and you want to add read permissions, if you just use the number 4, for example, the set will only have read permissions and all other permissions will be overwritten. So, to add both permissions you must use the number 6 (read + write permissions).
+> **NOTE**: **You must sum up all the permissions that you want each set to have**. If a set has write permissions and you want to add read permissions, if you just use the number 4, for example, the set will only have read permissions and all other permissions will be overwritten. **So, to add both permissions you must use the number 6 (read + write permissions)**.
 
 ### Ownership permissions
 You can also modify the group and user ownership of the file as well.
+
 #### Modify user ownership
 ```
 sudo chown william myFile
