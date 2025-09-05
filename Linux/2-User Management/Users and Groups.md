@@ -55,9 +55,9 @@ You'll notice that it looks very similar to the contents of ***/etc/passwd***, h
 >
 >    5- **Maximum password age**: Maximum number of days before a user has to change their password
 >
->    6- **Password warning period**:Number of days before a password is going to expire
+>    6- **Password warning period**: Number of days before a password is going to expire
 >
->    7- **Password inactivity period** Number of days after a password has expired to allow login with their password
+>    7- **Password inactivity period**: Number of days after a password has expired to allow login with their password
 >
 >    8- **Account expiration date**: Date that user will not be able to login
 >
