@@ -1,6 +1,6 @@
 ### Users and Groups
 In any traditional operating system, there are users and groups. They exist solely for access and permissions.
-Each user has their own home directory where their user specific files get stored, this is usually located in */home/username*, but can vary in different distributions.
+**Each user has their own home directory** where their user specific files get stored, this is usually located in */home/username*, but can vary in different distributions.
 
 The system uses **user ids (UID)** to manage users. Usernames are the friendly way to associate users with identification, but the system identifies users by their UID. The system also uses **groups** to manage permissions. Groups are just sets of users with permission set by that group, they are identified by the system with their **group ID (GID)**.
 
@@ -10,8 +10,8 @@ In Linux, one of the most important users is **root or superuser**. ***Root is t
 
 > There is a file called the ***/etc/sudoers*** file, this file lists users who can run *sudo*. You can edit this file with the **visudo** command.
 
-### Password management file
-To find out what users are mapped to what ID, look at the ***/etc/passwd*** file.
+### Password management file: *etc/passwd*
+To find out **what users are mapped to what ID**, look at the ***/etc/passwd*** file.
 ```
 $ cat /etc/passwd
 ```
@@ -39,8 +39,8 @@ Each line displays user information for one user, most commonly you'll see the r
 
 > Also should note that you can **edit** the ***/etc/passwd*** file by hand if you want to add users and modify information with the **vipw** tool.
 
-### User authentication file
-The ***/etc/shadow*** file is used to store information about user authentication. It requires superuser read permissions.
+### User authentication file: *etc/shadow*
+The ***/etc/shadow*** file is used to store **information about user authentication**. It requires superuser read permissions.
 ```
 $ sudo cat /etc/shadow
 ```
@@ -65,8 +65,8 @@ You'll notice that it looks very similar to the contents of ***/etc/passwd***, h
 
 > In most distributions today, user authentication doesn't rely on just the ***/etc/shadow*** file, there are other mechanisms in place such as **PAM (Pluggable Authentication Modules)** that replace authentication.
 
-### Groups management file
-Another file that is used in user management is the ***/etc/group*** file. This file allows for different groups with different permissions.
+### Groups management file: *etc/group*
+Another file that is used in user management is the ***/etc/group*** file. This file has the information for different groups with different permissions.
 ```
 $ cat /etc/group
 ```
@@ -80,14 +80,27 @@ The ***/etc/group*** fields are as follows:
 >
 >    4- **List of users**: You can manually specify users you want in a specific group.
 
-### User Management Tools
+### User Management Tools: *adduser, addgroup, usermod*
 Most enterprise environments are using management systems to manage users, accounts and passwords. However, on a single machine computer there are useful commands to run to manage users.
 
-- **Adding Users**: You can use the **useradd** (or the **adduser**) command. The **useradd** command contains more helpful features such as making a home directory and more. There are configuration files for adding new users that can be customized depending on what you want to allocate to a default user.
+- **Adding groups**: You can add groups by using the **addgroup** command.
     ```
-    $ sudo useradd rodolfo
+    sudo addgroup grupo_prueba
+    ```
+
+- **Adding Users**: You can use the **adduser** command. It will ask for a *new password* for the new user, as well as a *password confirmation*. This command also contains more helpful features, such as making a home directory and completing user information (full name, room number, phone number, etc.).
+    ```
+    $ sudo adduser rodolfo
     ```
     This command creates an entry in ***/etc/passwd*** for *rodolfo*, sets up default groups and adds an entry to the ***/etc/shadow*** file.
+
+     There are configuration files for adding new users that can be customized depending on what you want to allocate to a default user.
+    
+- **Adding user to a group**: To add a user into a specific group you can use the **--ingroup** option within the ***adduser*** command.
+    ```
+    sudo adduser usuario_prueba --ingroup grupo_prueba
+    ```
+    ![Adding user into a specific group](/Linux/2-User%20Management/Adding%20user%20to%20group.png)
 
 - **Removing users**: To remove a user, you can use the **userdel** command.
     ```
@@ -95,7 +108,21 @@ Most enterprise environments are using management systems to manage users, accou
     ```
     This basically does its best to undo the file changes by useradd.
 
-- **Changing Passwords**: This will allow you to change the password of yourself or another user (if you are root).
+- **Changing Passwords**: The ***passwd*** command will allow you to change the password of yourself or another user (if you are root).
     ```
     $ passwd rodolfo
     ```
+
+- **Adding users to secondary groups**: We can do this by using the ***usermod*** command with the -aG options.
+    - **-G**: specifies the new list of secondary groups.
+    - **-a**: stands for "append" and it is a very important option. It adds the user to the specified group(s) ***without removing*** them from their current groups. If you omit this option, the user will be removed from all other secondary groups not listed in the command.
+
+- **Group affiliations**: The **groups** command provides a clean one-line summary of the groups to which the given user belongs to.
+    ```
+    $ groups usuario_prueba
+
+    usuario_prueba : grupo_prueba users
+    ```
+    In this output, the name before the collon is the user being queried. The list after the colon, shows all the groups. The first one is the ***primary group***, and all the subsequent ones are the ***secondary groups***.
+
+- **Group deletion**: To delete a group, we use the **groupdel** command. It's ***important*** to note that ***you cannot delete the primary group of an existing user. You must first change the user's primary group before deleting the old one***. When successful, the command will not produce any output. It simply removes the group's entry from the system's group database, primarily the ***/etc/group*** file.
